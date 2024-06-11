@@ -10,9 +10,9 @@ import {
   AppMountParameters,
   CoreSetup,
   CoreStart,
-  DEFAULT_APP_CATEGORIES,
   Plugin,
   PluginInitializerContext,
+  DEFAULT_GROUPS,
 } from "../../../src/core/public";
 import { actionRepoSingleton } from "./pages/VisualCreatePolicy/utils/helpers";
 import { ROUTES } from "./utils/constants";
@@ -25,13 +25,6 @@ interface IndexManagementSetupDeps {
   dataSourceManagement?: DataSourceManagementPluginSetup;
 }
 
-const DATA_ADMINISTRATION: AppCategory = {
-  id: "DATA_ADMINISTRATION",
-  label: "Data administration",
-  order: 8000,
-  euiIconType: "wrench",
-};
-
 const ISM_category: Record<string, AppCategory & { group?: AppCategory }> = {
   indexes: {
     id: "indexes",
@@ -40,7 +33,6 @@ const ISM_category: Record<string, AppCategory & { group?: AppCategory }> = {
     }),
     order: 9000,
     euiIconType: "managementApp",
-    group: DATA_ADMINISTRATION,
   },
   backup: {
     id: "backup",
@@ -49,7 +41,6 @@ const ISM_category: Record<string, AppCategory & { group?: AppCategory }> = {
     }),
     order: 9010,
     euiIconType: "managementApp",
-    group: DATA_ADMINISTRATION,
   },
 };
 
@@ -92,6 +83,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Indexes",
       order: 8040,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.INDICES);
       },
@@ -102,6 +94,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Data streams",
       order: 8050,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.DATA_STREAMS);
       },
@@ -112,6 +105,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index alias",
       order: 8060,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.ALIASES);
       },
@@ -122,6 +116,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index state management policies",
       order: 9010,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.INDEX_POLICIES);
       },
@@ -132,6 +127,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index templates",
       order: 9011,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.TEMPLATES);
       },
@@ -142,6 +138,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index notification settings",
       order: 9012,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.NOTIFICATIONS);
       },
@@ -152,6 +149,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Rollup jobs",
       order: 9013,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.ROLLUPS);
       },
@@ -162,6 +160,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Transform jobs",
       order: 9014,
       category: ISM_category.indexes,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.TRANSFORMS);
       },
@@ -172,6 +171,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index snapshots",
       order: 9020,
       category: ISM_category.backup,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.SNAPSHOT_POLICIES);
       },
@@ -182,6 +182,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index snapshot policies",
       order: 9030,
       category: ISM_category.backup,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.SNAPSHOT_POLICIES);
       },
@@ -192,6 +193,7 @@ export class IndexManagementPlugin implements Plugin<IndexManagementPluginSetup,
       title: "Index snapshot repositories",
       order: 9040,
       category: ISM_category.backup,
+      group: DEFAULT_GROUPS.dataAdministration,
       mount: async (params: AppMountParameters) => {
         return mountWrapper(params, ROUTES.REPOSITORIES);
       },
